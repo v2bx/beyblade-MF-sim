@@ -1,0 +1,124 @@
+/*** GLOBAL VARIABLES ***/
+let canvas, ctx;
+let engine, world;
+let beyblade;
+const canvasWidth = 480;
+const canvasHeight = 480;
+
+/*** INIT FUNCTIONS ***/
+window.onload = init;
+
+function init() {
+    canvas = document.getElementById('myCanvas');
+    ctx = canvas.getContext('2d');
+
+    // Initialize Matter.js
+    engine = Matter.Engine.create();
+    world = engine.world;
+
+    // Create a single Beyblade within the arena boundary
+    beyblade = Matter.Bodies.circle(240, 240 - 100, 20, { // Start 100 pixels above the center
+        restitution: 0.9, // High bounciness
+        friction: 0.05,  // Low friction
+        mass: 1
+    });
+
+    // Set initial velocity towards the center
+    Matter.Body.setVelocity(beyblade, { x: 0, y: 2 }); // Move downwards
+
+    // Set angular velocity for spinning
+    Matter.Body.setAngularVelocity(beyblade, 0.2);
+
+    // Add Beyblade to the world
+    Matter.World.add(world, beyblade);
+
+    // Add a circular boundary for the arena
+    const boundary = Matter.Bodies.circle(canvasWidth / 2, canvasHeight / 2, 220, { // Arena radius
+        isStatic: true,
+        restitution: 0.5, // Reduced bounce
+        render: { visible: false } // Don't display directly
+    });
+    Matter.World.add(world, boundary);
+
+    // Run the engine
+    Matter.Engine.run(engine);
+
+    // Start the game loop
+    window.requestAnimationFrame(gameLoop);
+}
+
+/*** GAME LOOP ***/
+function gameLoop() {
+    window.requestAnimationFrame(gameLoop);
+
+    // Clear the canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Apply centripetal force to keep the Beyblade spinning
+    applyCentripetalForce();
+
+    // Draw the circular arena
+    drawArena();
+
+    // Draw the Beyblade
+    drawBeyblade();
+}
+
+// Function to draw the arena
+function drawArena() {
+    ctx.save();
+    ctx.translate(canvasWidth / 2, canvasHeight / 2);
+    ctx.beginPath();
+    ctx.arc(0, 0, 220, 0, Math.PI * 2); // Arena radius
+    ctx.fillStyle = '#888888';
+    ctx.fill();
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 5;
+    ctx.stroke();
+    ctx.restore();
+}
+
+// Function to draw the Beyblade
+function drawBeyblade() {
+    ctx.save();
+    ctx.translate(beyblade.position.x, beyblade.position.y);
+    ctx.rotate(beyblade.angle);
+
+    // Draw the Beyblade circle
+    ctx.beginPath();
+    ctx.arc(0, 0, 20, 0, Math.PI * 2);
+    ctx.fillStyle = 'red'; // Color for the Beyblade
+    ctx.fill();
+
+    // Draw the rotation line
+    const lineLength = 30; // Length of the line indicating the spin
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(lineLength, 0); // Line protruding to indicate spin direction
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.restore();
+}
+
+// Function to apply centripetal force
+function applyCentripetalForce() {
+    const centerX = canvasWidth / 2;
+    const centerY = canvasHeight / 2;
+    const forceMagnitude = 0.05; // Adjust for stronger/weaker force
+
+    const dx = centerX - beyblade.position.x;
+    const dy = centerY - beyblade.position.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    
+    // Only apply force if the Beyblade is not at the center
+    if (distance > 1) {
+        const force = {
+            x: (dx / distance) * forceMagnitude,
+            y: (dy / distance) * forceMagnitude
+        };
+
+        Matter.Body.applyForce(beyblade, beyblade.position, force);
+    }
+}

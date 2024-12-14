@@ -1,0 +1,154 @@
+/* Apply a dark background to the entire page */
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #181818; /* Dark background */
+  color: #f5f5f5; /* Light text color */
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* Universal box-sizing reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+  background-color: #181818;
+  text-align: center;
+}
+
+/* Heading styling */
+h1 {
+  color: #fff;
+  font-size: 36px;
+  margin-bottom: 30px;
+}
+
+/* Beyblade selection styling */
+#beySelection {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #2a2a2a; /* Dark background for the selection area */
+  padding: 15px;
+  width: 80%;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+
+/* Styling for the dropdowns and button */
+#beySelection label {
+  font-size: 16px;
+  margin-right: 10px;
+  color: #f5f5f5;
+}
+
+#beySelector1,
+#beySelector2 {
+  padding: 10px;
+  font-size: 16px;
+  margin-right: 10px;
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 5px;
+}
+
+#beySelector1:focus,
+#beySelector2:focus {
+  outline: none;
+  border-color: #007bff; /* Highlight on focus */
+}
+
+/* Button styling */
+button {
+  padding: 12px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #007bff; /* Blue background */
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.3s ease; /* Smooth transition for effects */
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+button:active {
+  background-color: #003d80; /* Even darker on click */
+  transform: scale(0.95); /* Slightly shrink when clicked */
+}
+
+button svg {
+  margin-left: 8px; /* Space between icon and text */
+}
+
+/* Style for the canvas */
+#arena {
+  border: 2px solid #ffffff;
+  background-color: #333;
+  display: block;
+  margin: 80px auto 20px;
+  border-radius: 50%;
+  width: 600px;
+  height: 600px;
+}
+
+/* Data display styling */
+#dataDisplay {
+  display: flex;
+  justify-content: space-between;
+  background-color: #2a2a2a;
+  padding: 15px;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 1200px;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+.beyblade-stats {
+  background-color: #333;
+  border: 1px solid #444;
+  padding: 10px;
+  border-radius: 5px;
+  width: 45%;
+}
+
+.beyblade-stats h3 {
+  margin-top: 0;
+  color: #fff;
+}
+
+/* General input and select focus styling */
+input,
+select,
+button {
+  background-color: #333;
+  border: 1px solid #444;
+  color: #f5f5f5;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #007bff;
+}

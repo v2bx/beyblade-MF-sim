@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Beyblade Arena</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.17.1/matter.min.js"></script>
+  </head>
+  <body>
+    <h1>AK's Beyblade Simulator</h1>
+
+    <!-- Beyblade selection -->
+    <div id="beySelection">
+      <label for="beySelector1">Choose Beyblade 1:</label>
+      <select id="beySelector1">
+        <optgroup label="Stamina Type">
+          <option value="Flame Sagitarrio">FLAME SAGITARRIO</option>
+          <option value="Earth Eagle">EARTH EAGLE</option>
+        </optgroup>
+        <optgroup label="Attack Type">
+          <option value="Lightning L-Drago">LIGHTNING L-DRAGO</option>
+          <option value="Storm Pegasus">STORM PEGASUS</option>
+        </optgroup>
+        <optgroup label="Defense Type">
+          <option value="Rock Leone">ROCK LEONE</option>
+          <option value="Basalt Horogium">BASALT HOROGIUM</option>
+        </optgroup>
+        <optgroup label="Balance Type">
+          <option value="Dark Wolf">DARK WOLF</option>
+          <option value="Rock Scorpio">ROCK SCORPIO</option>
+        </optgroup>
+      </select>
+
+      <label for="beySelector2">Choose Beyblade 2:</label>
+      <select id="beySelector2">
+        <optgroup label="Stamina Type">
+          <option value="Flame Sagitarrio">FLAME SAGITARRIO</option>
+          <option value="Earth Eagle">EARTH EAGLE</option>
+        </optgroup>
+        <optgroup label="Attack Type">
+          <option value="Lightning L-Drago">LIGHTNING L-DRAGO</option>
+          <option value="Storm Pegasus">STORM PEGASUS</option>
+        </optgroup>
+        <optgroup label="Defense Type">
+          <option value="Rock Leone">ROCK LEONE</option>
+          <option value="Basalt Horogium">BASALT HOROGIUM</option>
+        </optgroup>
+        <optgroup label="Balance Type">
+          <option value="Dark Wolf">DARK WOLF</option>
+          <option value="Rock Scorpio">ROCK SCORPIO</option>
+        </optgroup>
+      </select>
+      <button class="btn-class-name" onclick="startGame()">
+        Start Battle!
+      </button>
+    </div>
+
+    <!-- Canvas for the game -->
+    <canvas id="arena" width="480" height="480"></canvas>
+
+    <!-- Data display -->
+    <div id="dataDisplay">
+      <div class="beyblade-stats">
+        <h3>Beyblade 1 Stats</h3>
+        <p><strong>Starting Position:</strong> x: 240, y: 140</p>
+        <p><strong>Velocity:</strong> x: 0, y: 2</p>
+        <p><strong>Angular Velocity:</strong> 0.2</p>
+        <p><strong>RPM:</strong> 0</p>
+      </div>
+      <div class="beyblade-stats">
+        <h3>Beyblade 2 Stats</h3>
+        <p><strong>Starting Position:</strong> x: 240, y: 140</p>
+        <p><strong>Velocity:</strong> x: 0, y: 2</p>
+        <p><strong>Angular Velocity:</strong> 0.2</p>
+        <p><strong>RPM:</strong> 0</p>
+      </div>
+    </div>
+
+    <!-- Audio element for battle music -->
+    <audio id="battleMusic" src="MUSIC.mp3" preload="auto"></audio>
+
+    <script src="beyblades.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
